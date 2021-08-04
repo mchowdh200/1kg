@@ -33,11 +33,12 @@ rule GetCram:
     output:
         cram = f'{outdir}/{{sample}}.cram',
         crai = f'{outdir}/{{sample}}.cram.crai'
-    shell:
-        """
-        wget -O {{output.cram}} {sample2url[wildcards.sample][0]}
-        wget -O {{output.crai}} {sample2url[wildcards.sample][1]}
-        """
+
+    run:
+        cram_url = sample2url[wildcards.sample][0]
+        crai_url = sample2url[wildcards.sample][1]
+        shell(f'wget -O {output.cram} {cram_url}')
+        shell(f'wget -O {output.crai} {crai_url}')
 
 rule GetExcord:
     output:
