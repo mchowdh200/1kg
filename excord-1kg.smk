@@ -31,8 +31,8 @@ rule All:
 
 rule GetCram:
     output:
-        cram = f'{outdir}/{{sample}}.cram',
-        crai = f'{outdir}/{{sample}}.cram.crai'
+        cram = temp(f'{outdir}/{{sample}}.cram'),
+        crai = temp(f'{outdir}/{{sample}}.cram.crai')
 
     run:
         cram_url = sample2url[wildcards.sample][0]
