@@ -26,7 +26,7 @@ sample2url = {
 
 rule All:
     input:
-        expand(f'{outdir}/bed/{{sample}}.excord.bed.gz',
+        expand(f'{outdir}/{{sample}}.excord.bed.gz',
                sample=list(sample2url.keys()))
 
 rule GetCram:
