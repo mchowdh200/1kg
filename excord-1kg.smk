@@ -24,7 +24,11 @@ sample2url = {
 # split('/')[-1].split('.')[0]
 
 
-## TODO
+rule All:
+    input:
+        expand(f'{outdir}/bed/{{sample}}.excord.bed.gz',
+               sample=list(sample2url.keys()))
+
 rule GetCram:
     output:
         cram = f'{outdir}/{{sample}}.cram',
@@ -52,8 +56,8 @@ rule RunExcord:
         fai = fai,
         excord = rules.GetExcord.output.excord,
     output:
-        f'{outdir}/bed/{{file_id}}.excord.bed.gz'
+        f'{outdir}/{{sample}}.excord.bed.gz'
     log:
-        'logs/{file_id}-excord.log'
+        'logs/{sample}-excord.log'
     shell:
         'bash scripts/excord_cmd.sh {input.cram} {input.fasta} {output} {input.excord} &> {log}'
