@@ -48,8 +48,8 @@ rule RunExcord:
     input:
         cram = rules.GetBam.output.cram,
         crai = rules.GetBam.output.crai,
-        fasta = ref
-        fai = rules.GetReference.output.fai,
+        fasta = fasta,
+        fai = fai,
         excord = rules.GetExcord.output.excord,
     output:
         f'{outdir}/bed/{{file_id}}.excord.bed.gz'
