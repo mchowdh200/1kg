@@ -51,14 +51,20 @@ rule GetExcord:
 
 rule RunExcord:
     input:
-        cram = rules.GetCram.output.cram,
-        crai = rules.GetCram.output.crai,
         fasta = fasta,
         fai = fai,
         excord = rules.GetExcord.output.excord,
     output:
-        f'{outdir}/{{sample}}.excord.bed.gz'
-    log:
-        'logs/{sample}-excord.log'
-    shell:
-        'bash scripts/excord_cmd.sh {input.cram} {input.fasta} {output} {input.excord} &> {log}'
+        cram = temp(rules.GetCram.output.cram),
+        crai = temp(rules.GetCram.output.crai),
+        bed = f'{outdir}/{{sample}}.excord.bed.gz'
+
+    run:
+        cram_url = sample2url[wildcards.sample][0]
+        crai_url = sample2url[wildcards.sample][1]
+        shell(f'wget -O {output.cram} {cram_url}')
+        shell(f'wget -O {output.crai} {crai_url}')
+        shell('bash scripts/excord_cmd.sh {output.cram} {input.fasta} {output.bed} {input.excord}')
+
+    # shell:
+    #     'bash scripts/excord_cmd.sh {input.cram} {input.fasta} {output} {input.excord} &> {log}'
