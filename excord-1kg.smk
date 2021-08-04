@@ -46,8 +46,8 @@ rule GetExcord:
 
 rule RunExcord:
     input:
-        cram = rules.GetBam.output.cram,
-        crai = rules.GetBam.output.crai,
+        cram = rules.GetCram.output.cram,
+        crai = rules.GetCram.output.crai,
         fasta = fasta,
         fai = fai,
         excord = rules.GetExcord.output.excord,
