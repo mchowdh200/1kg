@@ -12,7 +12,7 @@ rule ConstructQueries:
     input: config.vcf
     output: f'{config.outdir}/queries.txt'
     threads: workflow.cores
-    conda: 'envs/bcftools.yaml'
+    conda: 'envs/pysam.yaml'
     shell:
         'python scripts/construct_queries.py {input} > {output}'
         
