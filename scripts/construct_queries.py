@@ -1,11 +1,8 @@
 import sys
 import pysam
 
-vcf = sys.argv[1]
-svtype = sys.argv[2]
-
-for record in pysam.VariantFile(vcf, 'r'):
-    if record.info['SVTYPE'] != svtype: continue
+for record in pysam.VariantFile(sys.argv[1], 'r'):
+    if svtype:=record.info['SVTYPE'] != sys.argv[2]: continue
     chrom = record.chrom
     pos = record.pos
     end = record.stop
@@ -19,4 +16,3 @@ for record in pysam.VariantFile(vcf, 'r'):
                   chrom, end+ci_end[0], end+ci_end[1],
                   svtype)))
     print(query)
-
