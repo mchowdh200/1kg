@@ -16,6 +16,7 @@ for record in pysam.VariantFile(vcf, 'r'):
 
     query = '\t'.join(
         map(str, (chrom, pos+ci_pos[0], pos+ci_pos[1],
-                    chrom, end+ci_end[0], end+ci_end[1])))
+                  chrom, end+ci_end[0], end+ci_end[1],
+                  svtype)))
     print(query)
 
