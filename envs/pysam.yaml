@@ -1,0 +1,3 @@
+name: pysam
+dependencies:
+  -pysam==0.19.1
