@@ -14,5 +14,5 @@ rule ConstructQueries:
     threads: workflow.cores
     conda: 'envs/pysam.yaml'
     shell:
-        'python scripts/construct_queries.py {input} > {output}'
+        'python scripts/construct_queries.py {input} DEL > {output}'
         

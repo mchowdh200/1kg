@@ -2,9 +2,10 @@ import sys
 import pysam
 
 vcf = sys.argv[1]
+svtype = sys.argv[2]
 
 for record in pysam.VariantFile(vcf, 'r'):
-    # TODO no translocations yet
+    if record.info['SVTYPE'] != svtype: continue
     chrom = record.chrom
     pos = record.pos
     end = record.stop
