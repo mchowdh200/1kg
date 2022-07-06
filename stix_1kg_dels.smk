@@ -10,7 +10,7 @@ rule ConstructQueries:
     to create a stix query stored in a text file
     """
     input: config.vcf
-    output: f'{outdir}/queries.txt'
+    output: f'{config.outdir}/queries.txt'
     threads: workflow.cores
     conda: 'envs/bcftools.yaml'
     shell:
