@@ -1,7 +1,7 @@
 from types import SimpleNamespace
 import sys
 
-configfile: 'conf/stix_1kg_dels.smk'
+configfile: 'conf/stix_1kg_dels.yaml'
 config = SimpleNamespace(**config) # enable dot instead of dict style access
 
 rule ConstructQueries:
