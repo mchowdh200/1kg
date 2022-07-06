@@ -2,7 +2,7 @@ import sys
 import pysam
 
 for record in pysam.VariantFile(sys.argv[1], 'r'):
-    if svtype:=record.info['SVTYPE'] != sys.argv[2]: continue
+    if (svtype:=record.info['SVTYPE']) != sys.argv[2]: continue
     chrom = record.chrom
     pos = record.pos
     end = record.stop
