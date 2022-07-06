@@ -1,2 +1,2 @@
-vcf: "/home/murad/data/1kg/vcf/ALL.wgs.integrated_sv_map_v2.20130502.svs.genotypes.vcf.gz"
-outdir: "TODO"
+vcf: "/home/much8161/data/1kg/vcf/ALL.wgs.integrated_sv_map_v2.20130502.svs.genotypes.vcf.gz"
+outdir: "/home/much8161/1kg/stix_output"
