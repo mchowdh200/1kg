@@ -29,7 +29,7 @@ while getopts ":p:d:i:t:l:r:" opt; do
 done
 
 hit=$(cd $index_path &&
-      stix -d $stix_db -i $stix_index -t $svtype -l $left -r $right |
+      stix -s 500 -d $stix_db -i $stix_index -t $svtype -l $left -r $right |
       tail -n+3 | # chomp the two header lines
       awk '{print $7+$8}' # columns with counts
    )
