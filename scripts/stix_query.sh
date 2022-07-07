@@ -31,5 +31,6 @@ done
 cat $queries |
     gargs -p $threads \
           "cd $index_path &&
-           echo -e {}     &&
-           stix -d $stix_db -t {2} -s 500 -i $stix_index -l {0} -r {1}"
+           echo -e QUERY REGION: {}     &&
+           stix -d $stix_db -t {2} -s 500 -i $stix_index -l {0} -r {1} &&
+           echo ========================================================="
