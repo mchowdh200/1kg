@@ -33,6 +33,7 @@ rule StixQuery:
         f"""
         bash scripts/stix_query.sh \\
         -q {{input}} \\
+        -p {config.stix_index_dir} \\
         -i {config.stix_index} \\
         -d {config.stix_db} \\
         -t {{threads}} \\

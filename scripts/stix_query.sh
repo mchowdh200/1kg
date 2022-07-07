@@ -2,11 +2,13 @@
 
 set -eu
 
-while getopts ":q:i:d:t:" opt; do
+while getopts ":q:p:i:d:t:" opt; do
     case $opt in
         q) queries="$OPTARG"
             ;;
-        i) stix_index="$OPTARG"
+        p) index_path="$OPTARG" # where the index lives
+           ;;
+        i) stix_index="$OPTARG" # no path, just filename for -i, -d options
             ;;
         d) stix_db="$OPTARG"
             ;;
@@ -27,4 +29,7 @@ done
 # TODO assumes gargs in the PATH, but could provide/download
 # the binary instead with the snakemake pipeline.
 cat $queries |
-gargs -p $threads "echo -e {} && stix -d $stix_db -t {2} -s 500 -i $stix_index -l {0} -r {1}"
+    gargs -p $threads \
+          "cd $index_path &&
+           echo -e {}     &&
+           stix -d $stix_db -t {2} -s 500 -i $stix_index -l {0} -r {1}"
