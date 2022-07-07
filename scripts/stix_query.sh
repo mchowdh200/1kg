@@ -2,17 +2,19 @@
 
 set -eu
 
-while getopts ":q:p:i:d:t:" opt; do
+while getopts ":p:d:i:t:l:r:" opt; do
     case $opt in
-        q) queries="$OPTARG"
-            ;;
-        p) index_path="$OPTARG" # where the index lives
+        p) index_path="$OPTARG"
            ;;
-        i) stix_index="$OPTARG" # no path, just filename for -i, -d options
-            ;;
         d) stix_db="$OPTARG"
             ;;
-        t) threads="$OPTARG"
+        i) stix_index="$OPTARG"
+           ;;
+        t) svtype="$OPTARG"
+            ;;
+        l) left="$OPTARG"
+            ;;
+        r) right="$OPTARG"
            ;;
         \?) "Invalid option -$OPTARG" >&2
             exit 1
@@ -26,11 +28,9 @@ while getopts ":q:p:i:d:t:" opt; do
     esac
 done
 
-# TODO assumes gargs in the PATH, but could provide/download
-# the binary instead with the snakemake pipeline.
-cat $queries |
-    gargs -p $threads \
-          "cd $index_path &&
-           echo -e QUERY REGION: {}     &&
-           stix -d $stix_db -t {2} -s 500 -i $stix_index -l {0} -r {1} &&
-           echo ========================================================="
+hit=$(cd $index_path &&
+      stix -d $stix_db -i $stix_index -t $svtype -l $left -r $right |
+      tail -n+3 | # chomp the two header lines
+      awk '{print $7+$8}' # columns with counts
+   )
+printf "$left\t$right\t$hit\n"
