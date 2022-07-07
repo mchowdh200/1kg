@@ -1,2 +1,4 @@
+stix_index: '/home/much8161/data/stix/1kg/alt_sort_b'
+stix_db: '/home/much8161/data/stix/1kg/1kg.ped.db'
 vcf: "/home/much8161/data/1kg/vcf/ALL.wgs.integrated_sv_map_v2.20130502.svs.genotypes.vcf.gz"
 outdir: "/home/much8161/data/1kg/stix_output"
