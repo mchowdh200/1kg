@@ -4,6 +4,10 @@ import sys
 configfile: 'conf/stix_1kg_dels.yaml'
 config = SimpleNamespace(**config) # enable dot instead of dict style access
 
+rule All:
+    input:
+        f'{config.outdir}/query_results.txt'
+
 rule ConstructQueries:
     """
     for each line in vcf, take the genomic region and confidence intervals
