@@ -2,7 +2,7 @@
 
 set -eu
 
-while getopts ":a:p:" opt; do
+while getopts ":q:i:d:t:" opt; do
     case $opt in
         q) queries="$OPTARG"
             ;;
