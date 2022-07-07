@@ -32,6 +32,6 @@ hits=$(cd $index_path &&
       stix -s 500 -d $stix_db -i $stix_index -t $svtype -l $left -r $right |
       tail -n+3 | # chomp the two header lines
       awk '{print $7+$8}' | # columns with counts
-      awk '{s+1=$1} END{print s}' # sum
+      awk '{s+=$1} END{print s}' # sum
    )
 printf "$left\t$right\t$hits\n"
