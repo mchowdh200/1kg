@@ -25,7 +25,7 @@ while getopts ":q:p:i:d:t:" opt; do
     esac
 done
 
-cat $queries | gargs -p $threads "bash stix_query.sh \\
+cat $queries | gargs -p $threads "bash scripts/stix_query.sh \\
                                   -p $index_path \\
                                   -d $stix_db \\
                                   -i $stix_index \\
