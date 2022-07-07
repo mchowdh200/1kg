@@ -1,6 +1,7 @@
 """
 Construct the -l and -r region strings from the vcf
 regions/confidence intervals separated by a tab.
+Includes SVTYPE of query in final column.
 """
 import sys
 import pysam

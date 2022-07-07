@@ -11,8 +11,26 @@ rule ConstructQueries:
     """
     input: config.vcf
     output: f'{config.outdir}/queries.txt'
-    threads: workflow.cores
+    threads: 1
     conda: 'envs/pysam.yaml'
     shell:
         'python scripts/construct_queries.py {input} DEL > {output}'
         
+
+rule StixQuery:
+    """
+    TODO run on just a handfull of regions before kicking off the full job
+    Parse the queries file with gargs to run stix queries in parallel
+    """
+    input: rules.ConstructQueries.output
+    output: f'{config.outdir}/query_results.txt'
+    threads: workflow.cores
+    shell:
+        f"""
+        bash scripts/stix_query.sh \\
+        -q {{input}} \\
+        -i {config.stix_index} \\
+        -d {config.stix_db} \\
+        -t {{threads}} \\
+        > {{output}}
+        """
