@@ -31,7 +31,7 @@ rule StixQuery:
     threads: workflow.cores
     shell:
         f"""
-        bash scripts/stix_query.sh \\
+        bash scripts/stix_cmd.sh \\
         -q {{input}} \\
         -p {config.stix_index_dir} \\
         -i {config.stix_index} \\
