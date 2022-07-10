@@ -39,9 +39,9 @@ result=$(cd $index_path &&
    )
 
 # take the list of samples and make into a single line separated by tab
-hits=$(cut -f2 <<<$result | tr '\n' '\t')
+hits=$(cut -f2 <<<"$result" | tr '\n' '\t')
 if [[ $print_header == "true" ]]; then
-    samples=$(cut -f1 <<<$result | tr '\n' '\t')
+    samples=$(cut -f1 <<<"$result" | tr '\n' '\t')
     printf "\t\t\t\t$samples\n"
 fi
 printf "$left\t$right\t$hits\n"
