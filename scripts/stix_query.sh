@@ -1,6 +1,6 @@
 #!/bin/env bash
 
-set -eu
+set -e
 
 print_header="false"
 while getopts ":p:d:i:t:l:r:h" opt; do
