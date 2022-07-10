@@ -25,6 +25,14 @@ while getopts ":q:p:i:d:t:" opt; do
     esac
 done
 
+# Do the first query with the header then the rest without.
+# Yep this is kinda dumb but who cares...
+head -1 $queries | gargs -p 1 "bash scripts/stix_query.sh \\
+                               -p $index_path \\
+                               -d $stix_db \\
+                               -i $stix_index \\
+                               -t {2} -l {0} -r {1} -h"
+
 cat $queries | gargs -p $threads "bash scripts/stix_query.sh \\
                                   -p $index_path \\
                                   -d $stix_db \\
